@@ -20,6 +20,9 @@ import org.springframework.security.web.authentication.*;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    @Value("${server.servlet.session.cookie.name}")
+    String cookieName;
+
     private final GithubOAuth2UserService githubOAuth2UserService;
     private final AuthenticationSuccessHandler oAuth2SuccessHandler;
     private final AuthenticationFailureHandler oAuth2FailureHandler;
@@ -56,7 +59,7 @@ public class SecurityConfig {
                                 response.setStatus(HttpStatus.NO_CONTENT.value()))
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
-                        .deleteCookies("REPONYX_SESSION"))
+                        .deleteCookies(cookieName))
                 .build();
     }
 
