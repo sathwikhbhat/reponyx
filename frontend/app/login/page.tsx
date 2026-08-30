@@ -14,6 +14,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle,} from "@/comp
 import {Spinner} from "@/components/ui/spinner";
 import {cn} from "@/lib/utils";
 import {getGithubLoginUrl} from '@/lib/api';
+import {useCurrentUser} from '@/hooks/use-auth';
 
 function LoginLoading() {
     return (
@@ -27,6 +28,15 @@ const LoginContent = () => {
     const params = useSearchParams();
     const router = useRouter();
     const error = params.get("error");
+    const next = params.get("next") || "/dashboard";
+    const {data: user, isLoading} = useCurrentUser();
+
+    useEffect(() => {
+        if (!isLoading && user) {
+            router.replace(next.startsWith("/") ? next : "/dashboard");
+        }
+    }, [user, isLoading, next, router]);
+
 
     return (
         <div className="relative flex min-h-svh flex-col overflow-hidden bg-background">
