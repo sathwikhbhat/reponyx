@@ -98,7 +98,7 @@ public class GithubApiClient {
                 .baseUrl(API_BASE)
                 .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken)
                 .defaultHeader(HttpHeaders.ACCEPT, "application/vnd.github+json")
-                .defaultHeader("X-GitHub-Api-Version", "2022-11-28")
+                .defaultHeader("X-GitHub-Api-Version", "2026-03-10")
                 .defaultHeader(HttpHeaders.USER_AGENT, "Reponyx")
                 .build();
     }
