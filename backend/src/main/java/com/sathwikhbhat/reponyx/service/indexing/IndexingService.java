@@ -97,13 +97,13 @@ public class IndexingService {
 
                 batch.addAll(chunks);
                 totalChunks += chunks.size();
-
-                if (batch.size() >= VECTOR_BATCH_SIZE) {
-                    vectorStore.add(batch);
-                    batch.clear();
-                }
             } catch (Exception ex) {
                 log.warn("Skipping file {} in {}: {}", path, repo.getFullName(), ex.getMessage());
+            }
+
+            if (batch.size() >= VECTOR_BATCH_SIZE) {
+                vectorStore.add(batch);
+                batch.clear();
             }
 
             processed++;
